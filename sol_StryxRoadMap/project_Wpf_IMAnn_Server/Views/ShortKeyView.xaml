@@ -1,0 +1,138 @@
+﻿<Window x:Class="Wpf_IMAnn_Server.Views.ShortKeyView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_IMAnn_Server.Views"
+        mc:Ignorable="d"
+        xmlns:localUtil="clr-namespace:Wpf_IMAnn_Server.Utils"
+        xmlns:cal="http://www.caliburnproject.org"
+        Title="단축키 설정" Height="450" Width="800">
+    
+    <Window.Resources>
+        <ObjectDataProvider x:Key="SignField_Caution" MethodName="GetValues" ObjectType="{x:Type localUtil:SignField_Caution}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="localUtil:SignField_Caution"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="SignField_Regulation" MethodName="GetValues" ObjectType="{x:Type localUtil:SignField_Regulation}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="localUtil:SignField_Regulation"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="SignField_Instruction" MethodName="GetValues" ObjectType="{x:Type localUtil:SignField_Caution}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="localUtil:SignField_Instruction"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="LightField" MethodName="GetValues" ObjectType="{x:Type localUtil:LightField}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="localUtil:LightField"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="SurfaceMark" MethodName="GetValues" ObjectType="{x:Type localUtil:SurfaceMark}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="localUtil:SurfaceMark"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="ETC" MethodName="GetValues" ObjectType="{x:Type localUtil:SignField_ETC}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="localUtil:SignField_ETC" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="50" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="단축키 설정" HorizontalAlignment="Center" FontSize="30" Padding="10"/>
+        
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="F1" HorizontalAlignment="Center" FontSize="20"/>
+        <ComboBox Grid.Row="1" Grid.Column="2" >
+            <ComboBoxItem Content="주의표지" Tag="1_101" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="규제표지" Tag="1_102" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="지시표지" Tag="1_103" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="보조표지" Tag="1_104" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="기타표지" Tag="1_000" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="노면표시" Tag="1_201" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="신호등" Tag="1_301" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="사람" Tag="1_401" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="차" Tag="1_402" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="도로공사" Tag="1_501" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+        </ComboBox>
+        <ComboBox Grid.Row="1" Grid.Column="3" x:Name="FieldComboBox_1" ItemsSource="{Binding Path=FieldComboBox_1 , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                  cal:Message.Attach="[Event SelectionChanged] = [Action SignFieldSelected1($this)]" SelectedItem="{Binding Path=item_1, Mode=TwoWay}"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="F2" HorizontalAlignment="Center" FontSize="20"/>
+        <ComboBox Grid.Row="2" Grid.Column="2">
+            <ComboBoxItem Content="주의표지" Tag="2_101" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]" />
+            <ComboBoxItem Content="규제표지" Tag="2_102" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="지시표지" Tag="2_103" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="보조표지" Tag="2_104" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="기타표지" Tag="2_000" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="노면표시" Tag="2_201" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]" />
+            <ComboBoxItem Content="신호등" Tag="2_301" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="사람" Tag="2_401" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="차" Tag="2_402" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="도로공사" Tag="2_501" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+        </ComboBox>
+        <ComboBox Grid.Row="2" Grid.Column="3" x:Name="FieldComboBox_2" ItemsSource="{Binding Path=FieldComboBox_2 , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                  cal:Message.Attach="[Event SelectionChanged] = [Action SignFieldSelected2($this)]"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="F3" HorizontalAlignment="Center" FontSize="20"/>
+        <ComboBox Grid.Row="3" Grid.Column="2">
+            <ComboBoxItem Content="주의표지" Tag="3_101" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]" />
+            <ComboBoxItem Content="규제표지" Tag="3_102" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="지시표지" Tag="3_103" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="보조표지" Tag="3_104" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="기타표지" Tag="3_000" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="노면표시" Tag="3_201" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]" />
+            <ComboBoxItem Content="신호등" Tag="3_301" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="사람" Tag="3_401" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="차" Tag="3_402" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="도로공사" Tag="3_501" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+        </ComboBox>
+        <ComboBox Grid.Row="3" Grid.Column="3" x:Name="FieldComboBox_3" ItemsSource="{Binding Path=FieldComboBox_3 , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                  cal:Message.Attach="[Event SelectionChanged] = [Action SignFieldSelected3($this)]"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="1" Text="F4" HorizontalAlignment="Center" FontSize="20"/>
+        <ComboBox Grid.Row="4" Grid.Column="2">
+            <ComboBoxItem Content="주의표지" Tag="4_101" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="규제표지" Tag="4_102" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="지시표지" Tag="4_103" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="보조표지" Tag="4_104" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="기타표지" Tag="4_000" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="노면표시" Tag="4_201" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]" />
+            <ComboBoxItem Content="신호등" Tag="4_301" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="사람" Tag="4_401" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="차" Tag="4_402" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+            <ComboBoxItem Content="도로공사" Tag="4_501" cal:Message.Attach="[Event Selected] = [Action CategorySelected($eventArgs)]"/>
+        </ComboBox>
+        <ComboBox Grid.Row="4" Grid.Column="3" x:Name="FieldComboBox_4" ItemsSource="{Binding Path=FieldComboBox_4 , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                  cal:Message.Attach="[Event SelectionChanged] = [Action SignFieldSelected4($this)]"/>
+
+        <Button Grid.Row="5" Grid.Column="3" x:Name="ShortKeyOk"  Content="OK" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
+
+    </Grid>
+</Window>

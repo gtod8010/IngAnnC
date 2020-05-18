@@ -1,0 +1,42 @@
+﻿<Window x:Class="IMAnn_Automation_Test.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IMAnn_Automation_Test"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <TextBox Grid.Row="0" Grid.Column="0" FontSize="18" Text="영상 파일 경로 입력" Name="image_path_input" GotFocus="image_path_input_GotFocus"/>
+        <Border Grid.Row="1" Grid.Column="0" BorderThickness="1" BorderBrush="Black" />
+        <Canvas Grid.Row="1" Grid.Column="0" Name="ImageCanvas" Width="{Binding Path=ActualHeight, ElementName=ImageCanvas}"
+                    MouseLeftButtonDown="sourceImage_MouseLeftButtonDown"
+                   MouseMove="sourceImage_MouseMove"
+                   MouseUp="sourceImage_MouseUp">
+            <Image x:Name="sourceImage" Width="{Binding Path=ActualWidth, ElementName=ImageCanvas}" Height="{Binding Path=ActualHeight, ElementName=ImageCanvas}"/>
+        </Canvas>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Button BorderThickness="1" Content="영상 불러오기" Click="Button_Click"/>
+            <Image Grid.Row="1" Grid.Column="0" x:Name="croppedImage" />
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0">
+            <TextBox FontSize="18" Text="TEST_LOG" Name="memo_log"></TextBox>
+        </Grid>
+    </Grid>
+</Window>

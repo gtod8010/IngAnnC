@@ -1,0 +1,40 @@
+﻿<Window x:Class="Wpf_IMAnn_Server.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_IMAnn_Server.Views"
+        xmlns:cal="http://www.caliburnproject.org"  Title="Stryx IMAnn"
+        mc:Ignorable="d" Height="450" Width="800" Background="LightGray">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+
+        <Rectangle Grid.Row="1" Grid.Column="1" Grid.RowSpan="5" Grid.ColumnSpan="3" Fill="White" RadiusX="10" RadiusY="10"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Height="80" FontSize="45" HorizontalAlignment="Center" Padding="10">Stryx IMAnn</TextBlock>
+        
+        <TextBlock Grid.Row="2" Grid.Column="1" FontSize="20" HorizontalAlignment="Center">ID</TextBlock>
+        <TextBox Grid.Row="2" Grid.Column="2" FontSize="20" HorizontalAlignment="Center" Width="200" x:Name="ID"></TextBox>
+
+        <TextBlock Grid.Row="3" Grid.Column="1" FontSize="20" HorizontalAlignment="Center">PassWord</TextBlock>
+        <PasswordBox Grid.Row="3" Grid.Column="2" FontSize="20" HorizontalAlignment="Center" Width="200" Name="PassWord" ></PasswordBox>
+
+        <Button Grid.Row="2" Grid.Column="3" Grid.RowSpan="2" HorizontalAlignment="Right" Margin="0,0,10,0"
+                 Name="LoginButtonClick">Login</Button>
+        
+    </Grid>
+</Window>

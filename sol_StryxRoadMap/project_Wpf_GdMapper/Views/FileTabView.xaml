@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="Wpf_GdMapper.Views.FileTabView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wpf_GdMapper.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="1" Grid.Column="1" BorderThickness="0,0,1,0" Padding="0,15,20,15" BorderBrush="#FF515050" >
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="0,0,0,0"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Button x:Name="mSelectFolder" FontSize="15" Width="70" Padding="5" Content="작업폴더&#10;   선택" BorderBrush="#FFB3B0AD" Background="#FFF3F2F1" BorderThickness="1,0,0,0"></Button>
+                <Button x:Name="SaveProject" FontSize="15" Width="70"  Padding="5" Content="저장" BorderBrush="#FFB3B0AD" Background="#FFF3F2F1"  BorderThickness="1,0,0,0"></Button>
+                <Button x:Name="ExportShapeFile" FontSize="15" Width="70" Padding="5" Content="Export&#10;  shp" BorderBrush="#FFB3B0AD" Background="#FFF3F2F1"  BorderThickness="1,0,1,0"></Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

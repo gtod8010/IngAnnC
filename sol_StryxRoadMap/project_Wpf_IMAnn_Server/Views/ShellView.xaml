@@ -1,0 +1,491 @@
+﻿<Window x:Class="Wpf_IMAnn_Server.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:core="clr-namespace:System;assembly=mscorlib"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_IMAnn_Server.Views"
+        xmlns:localUtil="clr-namespace:Wpf_IMAnn_Server.Utils"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cal="http://www.caliburnproject.org"
+        mc:Ignorable="d" WindowState="Maximized"
+        cal:Message.Attach="[Event KeyDown] = [Action KeyDown($this,$eventArgs)];
+        [Event Closing] = [Action Closing()]"
+        Name="window"        
+        Title="Stryx IMAnn" Height="450" Width="800">
+        <!--xmlns:materialDesign ="http://materialdesigninxaml.net/winfx/xaml/themes"-->
+        
+    <!-- SignField enum 리소스 -->
+    <Window.Resources>
+        <ObjectDataProvider x:Key="SignField_Caution" MethodName="GetValues" ObjectType="{x:Type localUtil:SignField_Caution}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="localUtil:SignField_Caution" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="SignField_Regulation" MethodName="GetValues" ObjectType="{x:Type localUtil:SignField_Regulation}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="localUtil:SignField_Regulation" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="SignField_Instruction" MethodName="GetValues" ObjectType="{x:Type localUtil:SignField_Caution}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="localUtil:SignField_Instruction" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="LightField" MethodName="GetValues" ObjectType="{x:Type localUtil:LightField}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="localUtil:LightField" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="SurfaceMark" MethodName="GetValues" ObjectType="{x:Type localUtil:SurfaceMark}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="localUtil:SurfaceMark" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="ETC" MethodName="GetValues" ObjectType="{x:Type localUtil:SignField_ETC}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="localUtil:SignField_ETC"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="Construction" MethodName="GetValues" ObjectType="{x:Type localUtil:Construction}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="localUtil:Construction" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="Assistant" MethodName="GetValues" ObjectType="{x:Type localUtil:SignField_Assistant}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="localUtil:SignField_Assistant" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="Human" MethodName="GetValues" ObjectType="{x:Type localUtil:Human}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="localUtil:Human" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        
+        <ObjectDataProvider x:Key="Car" MethodName="GetValues" ObjectType="{x:Type localUtil:Car}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="localUtil:Car" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*" x:Name="MainBorder"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <!--상단 탭-->
+        <Border Grid.Row="0" Grid.ColumnSpan="4" BorderThickness="0,1,0,1" BorderBrush="LightGray" Background="#FFF3F2F1">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="FileContent" Width="60" Height="25" BorderThickness="0" Background="#FFF3F2F1" FontSize="15" >파일</Button>
+                <Button x:Name="WindowContent" Width="60" Height="25" BorderThickness="0" Background="#FFF3F2F1" FontSize="15" >창</Button>
+                <Button x:Name="ToolContent" Width="60" Height="25" BorderThickness="0" Background="#FFF3F2F1" FontSize="15" >도구</Button>
+            </StackPanel>
+        </Border>
+
+        <!-- 상단 탭 영역 -->
+        <Grid Grid.Row="1" Grid.ColumnSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" BorderThickness="1,0,1,0" BorderBrush="LightGray" Background="#FFF3F2F1" x:Name="MoveBack">
+                    <!--<materialDesign:PackIcon Kind="ChevronDoubleLeft" Width="25" Height="25"/>-->
+                </Button>
+                <Button  Grid.Column="1" BorderThickness="0,0,1,0" BorderBrush="LightGray" Background="#FFF3F2F1" x:Name="MoveFront">
+                    <!--<materialDesign:PackIcon Kind="ChevronDoubleRight" Width="25" Height="25"/>-->
+                </Button>
+                <TextBox Grid.Column="2" x:Name="MoveIndex"/>
+                <Button  Grid.Column="3" x:Name="MoveButton" Content="이동" cal:Message.Attach="[Event MouseLeftButtonDown] = [Action MouseButton()]" 
+                         BorderThickness="0,0,1,0" BorderBrush="LightGray"/>
+
+               
+            </Grid>
+
+
+            <Border Grid.Column="0" Grid.Row="0" Height="100" BorderThickness="0,0,0,1" BorderBrush="LightGray" Background="#FFF3F2F1">
+                <ContentControl x:Name="ActiveItem"/>
+            </Border>
+
+            <Border Grid.Column="1" Grid.Row="0" Height="100" BorderThickness="1,0,0,1" BorderBrush="LightGray" Background="#FFF3F2F1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Row="0" Grid.ColumnSpan="4" BorderThickness="0,0,0,1" BorderBrush="LightGray" />
+                    <Border Grid.RowSpan="2" Grid.Column="0" BorderThickness="0,0,1,0" BorderBrush="LightGray" />
+                    <Border Grid.RowSpan="2" Grid.Column="1" BorderThickness="0,0,1,0" BorderBrush="LightGray" />
+                    <Border Grid.RowSpan="2" Grid.Column="2" BorderThickness="0,0,1,0" BorderBrush="LightGray" />
+                    
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="F1" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="F2" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="F3" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Grid.Column="3" Text="F4" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding ShortKey_F1}" TextWrapping="WrapWithOverflow" 
+                               FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ShortKey_F2}" TextWrapping="WrapWithOverflow" 
+                               FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding ShortKey_F3}" TextWrapping="WrapWithOverflow" 
+                               FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding ShortKey_F4}" TextWrapping="WrapWithOverflow" 
+                               FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+
+            <Border Grid.Column="2" Height="100" BorderThickness="2,0,0,1" BorderBrush="LightGray" Background="#FFF3F2F1">
+            
+                <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                    <Border Grid.Row="0" BorderThickness="0,0,0,2" BorderBrush="LightGray" Background="#FFF3F2F1">
+                        <DockPanel >
+                            <Border BorderThickness="0,0,2,0" BorderBrush="LightGray" Background="#FFF3F2F1">
+                                <TextBlock Text="작업 폴더" Width="150" TextAlignment="Center" FontSize="16" />
+                            </Border>
+                            <TextBlock Text="{Binding TextBlockFolderName, Mode=TwoWay}" FontSize="16"
+                                       TextAlignment="Center" TextWrapping="WrapWithOverflow"/>
+                        </DockPanel>
+                    </Border>
+                    
+                    <Border Grid.Row="1" BorderThickness="0,0,0,2" BorderBrush="LightGray" Background="#FFF3F2F1">
+                        <DockPanel >
+                            <Border BorderThickness="0,0,2,0" BorderBrush="LightGray" Background="#FFF3F2F1">
+                                <TextBlock Text="그리기 도구" Width="150" TextAlignment="Center" FontSize="16" />
+                            </Border>
+                            <TextBlock Text="{Binding selectedShapeType, Mode=OneWay}" FontSize="16" TextAlignment="Center"/>
+                        </DockPanel>
+                    </Border>
+                    <Border Grid.Row="2" BorderThickness="0,0,0,2" BorderBrush="LightGray" Background="#FFF3F2F1">
+                        <DockPanel >
+                            <Border BorderThickness="0,0,2,0" BorderBrush="LightGray" Background="#FFF3F2F1">
+                                <TextBlock Text="영상 번호" Width="150" TextAlignment="Center" FontSize="16" />
+                            </Border>
+                            <TextBlock Text="{Binding SelectedImageNodeModel.imageid, Mode=TwoWay}" FontSize="16" TextAlignment="Center"/>
+                        </DockPanel>
+                    </Border>                   
+            </Grid>
+            </Border>
+
+        </Grid>
+
+        <!-- 창 영역 -->
+        <Border x:Name="border"  Grid.Row="2" Grid.ColumnSpan="4" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F2F1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*" MinWidth="{Binding ActualHeight, ElementName=border, Mode=OneWay}"/>
+                    <ColumnDefinition Width="*" MinWidth="220" MaxWidth="250"/>
+                    <ColumnDefinition Width="*" MinWidth="220" MaxWidth="250"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Layer -->
+                <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" BorderThickness=" 1" BorderBrush="LightGray" Background="#FFF3F2F1">
+                    <ContentControl />
+                </Border>
+
+                <!-- Test - Image List -->
+                <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F2F1"/>
+                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    
+                    <DataGrid Grid.Row="0" ItemsSource="{Binding ImageNodeModelCollection, NotifyOnSourceUpdated=True}" AutoGenerateColumns="False"
+                              IsSynchronizedWithCurrentItem="True" SelectedIndex="{Binding SelectedIndex}" IsReadOnly="True"
+                        cal:Message.Attach="[Event SelectionChanged] = [Action ImageNodeChanged($this,$eventArgs)]" BorderBrush="LightGray"
+                              x:Name="NodeDataGrid">
+                        <DataGrid.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="SlateGray"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding imageid}" Header="Id" Width="100"/>
+                            <DataGridTextColumn Binding="{Binding N_anno}" Header="개수"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <!--<TextBox Grid.Row="1" Margin="0,0,50,0" x:Name="MoveIndex"/>
+                    <Button x:Name="MoveButton" Grid.Row="1" HorizontalAlignment="Right" Width="50" Content="이동"
+                             cal:Message.Attach="[Event MouseLeftButtonDown] = [Action MouseButton()]" />-->
+                </Grid>
+                
+
+                <!-- Image -->
+                <!--<GridSplitter Grid.Row="0" Grid.Column ="0" Grid.RowSpan="2" Background="Gray" Width="5" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>-->
+                <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F2F1"
+                            cal:Message.Attach="[Event SizeChanged] = [Action BorderSizeChanged()]">
+                <ContentControl x:Name="CamWindowViewModel"/>                      
+                </Border>
+                <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column ="2" Background="Gray" Width="5" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+
+                <!-- Zoom -->
+                <Border Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F2F1" Margin="5,0,0,0">
+                    <ContentControl x:Name="CroppedBoxViewModel" />
+                </Border>
+
+                <!-- AnnoShape Information -->
+                <Border Grid.Row="1" Grid.Column="3" BorderThickness="1,1,1,0" BorderBrush="LightGray" Background="#FFF3F2F1" x:Name="AnnoInfoBorder"/>
+                <Grid Grid.Row="1" Grid.Column="3" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                                        
+                    <TextBlock Grid.Row="0" Text="Annotation Info" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <DataGrid Grid.Row="1" x:Name="ShapeDataGrid" ItemsSource="{Binding AnnoShapeModelCollection, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
+                              Width="{Binding ActualWidth, ElementName=AnnoInfoBorder}"
+                              IsReadOnly="True" ColumnHeaderHeight="25" Margin="0,0,3,0"
+                              SelectionMode="Single" CanUserSortColumns="True" BorderBrush="LightGray"
+                              SelectedItem="SelectedAnnoShapeModel" 
+                              cal:Message.Attach="[Event SelectionChanged] = [Action AnnSelectionChanged($this)]" >
+                        <DataGrid.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="SlateGray"/>
+                                        <Setter Property="IsTabStop" Value="False"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <DataGrid.ContextMenu>
+                            <ContextMenu >
+                                <MenuItem Header="Delete" Click="MenuItem_Click" 
+                                          cal:Message.Attach="[Event Click] = [Action AnnMouseRightButtonDown($source)]" />
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                            <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding shapeid}" Header="shapeid" SortMemberPath="{Binding uniqueShapeid}"/>
+                            <DataGridTextColumn Binding="{Binding imageid}" Header="imageid"/>
+                            <DataGridTextColumn Binding="{Binding shapetype}" Header="shapetype"/>
+                            <DataGridTextColumn Binding="{Binding signfield, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="signfield"/>
+                            <DataGridTextColumn Binding="{Binding memo}" Header="memo"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+                <!-- Properties -->
+                <GridSplitter Grid.Row="1" Grid.Column="3" Background="Gray" Width="5" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+                <Border Grid.Row="1" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F2F1" Margin="5,0,0,0" />
+                <Grid Grid.Row="1" Grid.Column="2" Margin="5,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Property" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0" BorderThickness="1,1,1,1" BorderBrush="LightGray" Background="#FFF3F2F1"/>
+                        <Border Grid.Row="0" Grid.Column="1" BorderThickness="0,1,1,1" BorderBrush="LightGray" Background="#FFF3F2F1"/>
+                        <Border Grid.Row="1" BorderThickness="1,0,1,1" BorderBrush="LightGray" Background="#FFF3F2F1"/>
+                        <Border Grid.Row="1" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="LightGray" Background="#FFF3F2F1"/>
+                        <Border Grid.Row="2" BorderThickness="1,0,1,1" BorderBrush="LightGray" Background="#FFF3F2F1"/>
+                        <Border Grid.Row="2" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="LightGray" Background="#FFF3F2F1"/>
+                        <Border Grid.Row="3" BorderThickness="1,0,1,1" BorderBrush="LightGray" Background="#FFF3F2F1"/>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="SignImage" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <Image Grid.Row="0" Grid.Column="1" x:Name="SignImage" Source="{Binding SignImage}" />
+                        <!--Source="{Binding ElementName=ShapeDataGrid, Path=SelectedItem.signImageSource, UpdateSourceTrigger=PropertyChanged}" />-->
+                        
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="SignField" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <Grid Grid.Row="1" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <!--<StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FlowDirection="LeftToRight" Orientation="Horizontal"  >
+                                <Button Content="표지판" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"  BorderBrush="#FFB3B0AD" Background="#FFF3F2F1"  BorderThickness="1,0,0,0" Padding="5"/>
+                                <Button Content="노면표시" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="#FFB3B0AD" Background="#FFF3F2F1"  BorderThickness="1,0,0,0" Padding="5"/>
+                                <Button Content="신호등" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"  BorderBrush="#FFB3B0AD" Background="#FFF3F2F1"  BorderThickness="1,0,0,0" Padding="5"/>
+                            </StackPanel>-->
+                            
+                            <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                <TextBlock Text="주의표지" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="규제표지" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="지시표지" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="보조표지" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="기타표지" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="도로공사" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="노면표시" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="신호등" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="사람" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="차" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="45,0,3,0" Width="100">
+                                <ComboBox SelectedItem="{Binding ElementName=ShapeDataGrid, Path=SelectedItem.signfield, Mode=TwoWay}"
+                                  BorderBrush="LightGray" Height="25" ItemsSource="{Binding Source={StaticResource SignField_Caution}}" 
+                                  cal:Message.Attach="[Event SelectionChanged] = [Action SignFieldChanged()];
+                                          [Event DropDownOpened] = [Action ComboBoxOpened($source)]">                                    
+                                </ComboBox>
+
+                                <ComboBox SelectedItem="{Binding ElementName=ShapeDataGrid, Path=SelectedItem.signfield, Mode=TwoWay}" 
+                                  ItemsSource="{Binding Source={StaticResource SignField_Regulation}}" BorderBrush="LightGray" Height="25"
+                                  cal:Message.Attach="[Event SelectionChanged] = [Action SignFieldChanged()];
+                                          [Event DropDownOpened] = [Action ComboBoxOpened($source)]" >
+                                </ComboBox>
+                                
+                                <ComboBox SelectedItem="{Binding ElementName=ShapeDataGrid, Path=SelectedItem.signfield, Mode=TwoWay}" 
+                                  ItemsSource="{Binding Source={StaticResource SignField_Instruction}}" BorderBrush="LightGray" Height="25"
+                                  cal:Message.Attach="[Event SelectionChanged] = [Action SignFieldChanged()];
+                                          [Event DropDownOpened] = [Action ComboBoxOpened($source)]" />
+
+                                <ComboBox SelectedItem="{Binding ElementName=ShapeDataGrid, Path=SelectedItem.signfield, Mode=TwoWay}" 
+                                  ItemsSource="{Binding Source={StaticResource Assistant}}" BorderBrush="LightGray" Height="25"
+                                  cal:Message.Attach="[Event SelectionChanged] = [Action SignFieldChanged()];
+                                          [Event DropDownOpened] = [Action ComboBoxOpened($source)]" />
+                                
+                                <ComboBox SelectedItem="{Binding ElementName=ShapeDataGrid, Path=SelectedItem.signfield, Mode=TwoWay}" 
+                                  ItemsSource="{Binding Source={StaticResource ETC}}" BorderBrush="LightGray" Height="25"
+                                  cal:Message.Attach="[Event SelectionChanged] = [Action SignFieldChanged()];
+                                          [Event DropDownOpened] = [Action ComboBoxOpened($source)]" />
+
+                                <ComboBox SelectedItem="{Binding ElementName=ShapeDataGrid, Path=SelectedItem.signfield, Mode=TwoWay}" 
+                                  ItemsSource="{Binding Source={StaticResource Construction}}" BorderBrush="LightGray" Height="25"
+                                  cal:Message.Attach="[Event SelectionChanged] = [Action SignFieldChanged()];
+                                          [Event DropDownOpened] = [Action ComboBoxOpened($source)]" />
+
+                                <ComboBox SelectedItem="{Binding ElementName=ShapeDataGrid, Path=SelectedItem.signfield, Mode=TwoWay}" 
+                                  ItemsSource="{Binding Source={StaticResource SurfaceMark}}" BorderBrush="LightGray" Height="25"
+                                  cal:Message.Attach="[Event SelectionChanged] = [Action SignFieldChanged()];
+                                          [Event DropDownOpened] = [Action ComboBoxOpened($source)]" />
+                                
+                                <ComboBox SelectedItem="{Binding ElementName=ShapeDataGrid, Path=SelectedItem.signfield, Mode=TwoWay}" 
+                                  ItemsSource="{Binding Source={StaticResource LightField}}" BorderBrush="LightGray" Height="25"
+                                  cal:Message.Attach="[Event SelectionChanged] = [Action SignFieldChanged()];
+                                          [Event DropDownOpened] = [Action ComboBoxOpened($source)]" />
+                                
+                                <ComboBox SelectedItem="{Binding ElementName=ShapeDataGrid, Path=SelectedItem.signfield, Mode=TwoWay}" 
+                                  ItemsSource="{Binding Source={StaticResource Human}}" BorderBrush="LightGray" Height="25"
+                                  cal:Message.Attach="[Event SelectionChanged] = [Action SignFieldChanged()];
+                                          [Event DropDownOpened] = [Action ComboBoxOpened($source)]" />
+                                
+                                <ComboBox SelectedItem="{Binding ElementName=ShapeDataGrid, Path=SelectedItem.signfield, Mode=TwoWay}" 
+                                  ItemsSource="{Binding Source={StaticResource Car}}" BorderBrush="LightGray" Height="25"
+                                  cal:Message.Attach="[Event SelectionChanged] = [Action SignFieldChanged()];
+                                          [Event DropDownOpened] = [Action ComboBoxOpened($source)]" />
+                            </StackPanel>
+                        </Grid>
+                        
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="X" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding ElementName=ShapeDataGrid, Path=SelectedItem.col[0]}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Y" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding ElementName=ShapeDataGrid, Path=SelectedItem.row[0]}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Memo" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Grid  Grid.Row="4" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="62"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+                            <TextBox Text="{Binding ElementName=ShapeDataGrid, Path=SelectedItem.memo, Mode=TwoWay}" BorderBrush="LightGray" x:Name="memoText"/>
+                            <WrapPanel Grid.Row="1" Margin="1">
+                                <Button Content="30" Width="30" Height="30" cal:Message.Attach="[Event Click] = [Action MemoNumClicked($source)]"/>
+                                <Button Content="40" Width="30" Height="30" cal:Message.Attach="[Event Click] = [Action MemoNumClicked($source)]"/>
+                                <Button Content="50" Width="30" Height="30" cal:Message.Attach="[Event Click] = [Action MemoNumClicked($source)]"/>
+                                <Button Content="60" Width="30" Height="30" cal:Message.Attach="[Event Click] = [Action MemoNumClicked($source)]"/>
+                                <Button Content="70" Width="30" Height="30" cal:Message.Attach="[Event Click] = [Action MemoNumClicked($source)]"/>
+                                <Button Content="80" Width="30" Height="30" cal:Message.Attach="[Event Click] = [Action MemoNumClicked($source)]"/>
+                                <Button Content="90" Width="30" Height="30" cal:Message.Attach="[Event Click] = [Action MemoNumClicked($source)]"/>
+                                <Button Content="100" Width="30" Height="30" cal:Message.Attach="[Event Click] = [Action MemoNumClicked($source)]"/>
+                                <Button Content="110" Width="30" Height="30" cal:Message.Attach="[Event Click] = [Action MemoNumClicked($source)]"/>
+                                <Button Content="-1" Width="30" Height="30" cal:Message.Attach="[Event Click] = [Action MemoNumClicked($source)]"/>
+                            </WrapPanel>                            
+                            <Button x:Name="MemoButton" Grid.Row="2" Content="등록" BorderBrush="LightGray" />
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+
+            </Grid>
+
+            <!--<TabControl Grid.Row="2" Grid.Column="4">
+                <TabItem Header="tab1"/>
+                <TabItem Header="tab2"/>
+            </TabControl>-->
+        </Border>
+
+        <!-- 하단 바 -->
+        <Border Grid.Row="3" Grid.ColumnSpan="4" BorderThickness="0,1,0,1" BorderBrush="LightGray" Background="#FFF3F2F1">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="BottomBarText"/>
+            </StackPanel>
+        </Border>
+
+
+    </Grid>
+</Window>
